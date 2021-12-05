@@ -1,17 +1,17 @@
 package falsigram.controller;
+import falsigram.bench.Bencher;
 import falsigram.processor.JSONProcessor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class JSONController {
 
-    @PostMapping(value = "RequestJSONProcess")
-    public String JSONRequestExecuter(
+    @PostMapping(value="/Bench")
+    public String CSVBenchExecutor(
             @RequestBody String request
     ) {
-        JSONProcessor jP = new JSONProcessor(request);
-
-        return jP.processJSONRequest();
+        Bencher b = new Bencher();
+        return b.bench(request);
     }
 
 }

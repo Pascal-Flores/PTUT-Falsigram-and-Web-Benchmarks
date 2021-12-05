@@ -1,29 +1,37 @@
 /**
-*
-* This class allows to process the JSON request
-*
-* @author Pascal Flores
+ *
+ * This class allows to process the JSON request
+ *
+ * @author Pascal Flores
  *
  */
 
 package falsigram.processor;
 
+import falsigram.bench.Bencher;
 import org.json.JSONObject;
 import falsigram.text.core.Text;
 import falsigram.text.utils.*;
 import java.time.Duration;
+import java.util.List;
+
 
 public class JSONProcessor {
 
     private JSONObject request;
     private Text text;
+    private Bencher b;
 
     /**
      * @param stringRequest
      */
-    public JSONProcessor(String stringRequest){
+    public JSONProcessor(String stringRequest, Bencher b){
+        this.b = b;
         this.request = new JSONObject(stringRequest);
+        long sT = System.nanoTime();
         text = new Text(request.getString("text"));
+        float dT = (System.nanoTime()-sT)/1000000f;
+        this.b.setTmpText_gen(dT);
     }
 
     /**
@@ -34,7 +42,7 @@ public class JSONProcessor {
      * @return String
      */
     public String processJSONRequest() {
-        JSONObject instruction;
+        /*JSONObject instruction;
         float occurrence;
         for (int i = 0; i < request.getJSONArray("instructions").length(); ++i) {
             instruction = request.getJSONArray("instructions").getJSONObject(i);
@@ -143,8 +151,10 @@ public class JSONProcessor {
                         break;
                 }
             }
-        }
+        }*/
+        long sT = System.nanoTime();
         String ret = this.text.toString();
+        this.b.setTmpToString((System.nanoTime()-sT)/1000000f);
         return ret;
     }
 }
