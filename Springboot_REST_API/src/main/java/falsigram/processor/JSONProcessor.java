@@ -9,6 +9,8 @@
 package falsigram.processor;
 
 import falsigram.bench.Bencher;
+import falsigram.bench.SequenceBencher;
+import falsigram.bench.SequenceBencher;
 import org.json.JSONObject;
 import falsigram.text.core.Text;
 import falsigram.text.utils.*;
